@@ -1,0 +1,82 @@
+																																			; AMD Graphics Driver Component INF
+;   OpenGL Software Component INF
+;
+; Copyright(C) AMD 2007-2020
+;-----------------------------------------------
+
+[Version]
+Signature="$Windows NT$"
+Provider=%AMD%
+ClassGUID={5c4c3332-344d-483c-8739-259e934c9cc8}
+Class=SoftwareComponent
+DriverVer=07/29/2022, 1.0.2220.1
+;;LayoutFile=layout.inf
+CatalogFile=AMDFDANS.CAT
+
+[DestinationDirs]
+DefaultDestDir = 11, AMD\ANR
+AMDFDANS.System32 = 11
+
+
+[Manufacturer]
+%AMD% = AMD.Mfg, NTamd64.10.0
+
+[AMD.Mfg.NTamd64.10.0]
+%AMDFDANSName%=AMDFDANS, SWC\AMDFDANS-1.0.0
+
+[Strings]
+AMD        = "Advanced Micro Devices, Inc."
+AMDFDANSName = "AMD-Dynamic Audio Noise Supression"
+DiskId     = "Advanced Micro Devices, Inc. Installation DISK (FDANS)"
+;
+; Non-Localizable Strings
+;
+REG_SZ         = 0x00000000
+
+
+
+[AMDFDANS.NT]
+AddReg = AMDFDANSRegistry
+CopyFiles=AMDFDANS.NT.Copy
+CopyFiles=AMDFDANS.System32
+
+[AMDFDANS.NT.Services]
+AddService = ,2
+
+
+[AMDFDANSRegistry]
+;; Cannot set - not DCH compliant HKCU,"Software\AMD\CN\Audio",ANRToggleState,%REG_SZ%,false
+;;HKLM,"CurrentControlSet\Services\EventLog\Application\AMD_ANR_BG_PROC",EventMessageFile,%REG_SZ%,%%SystemRoot%%\System32\AMD\ANR\anrsvc.dll
+;;HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Run",AMDNoiseSuppression,%REG_SZ%,%%SystemRoot%%\System32\AMD\ANR\AMDNoiseSuppression.exe
+
+
+[AMDFDANS.NT.Copy]
+AMDNoiseSuppression.exe
+anronnxlib.dll
+anrsvc.dll
+Default.anrcfg
+DirectML.dll
+onnxruntime.dll
+STLN_model.onnx
+STLN_modelv2.onnx
+
+[AMDFDANS.System32]
+ANR-bgproc-Lib.dll
+
+[SourceDisksNames]
+1 = %DiskId%,,,""
+
+[SourceDisksFiles]
+AMDNoiseSuppression.exe=1
+anronnxlib.dll=1
+anrsvc.dll=1
+Default.anrcfg=1
+DirectML.dll=1
+onnxruntime.dll=1
+STLN_model.onnx=1
+STLN_modelv2.onnx=1
+ANR-bgproc-Lib.dll=1
+
+
+
+
